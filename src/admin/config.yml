@@ -1,0 +1,8 @@
+backend:
+  name: github
+  repo: forrestab/www-collections
+
+media_folder: "src/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
