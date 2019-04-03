@@ -6,5 +6,21 @@
 
 module.exports = {
 	siteName: "Collections",
-	plugins: []
+	plugins: [
+		{
+			use: "@gridsome/source-filesystem",
+			options: {
+				// Normally you want data files to be in `src/data/*`, however, I
+				// dont want these files published since building their pages
+				// using graphql.
+				path: "data/**/*.md"
+			}
+		},
+		{
+			use: "gridsome-plugin-netlify-cms",
+			options: {
+				publicPath: "/admin"
+			}
+		}
+	]
 }
