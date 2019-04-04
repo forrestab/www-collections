@@ -6,3 +6,30 @@ media_folder: "src/assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
 collections:
+  - name: "comics"
+    identifier_field: "slug"
+    label: "Comics"
+    folder: "data/comics"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Type", name: "type", widget: "string", default: "comic"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Alias", name: "alias", widget: "string", required: false}
+      - {label: "Publisher", name: "publisher", widget: "select", options: ["Dark Horse", "IDW", "Legendary", "Marvel"]}
+      - {label: "Release Year", name: "releaseYear", widget: "date", default:"", format: "YYYY"}
+      - label: "Issues"
+        name: "issues"
+        widget: "list"
+        fields:
+          - {label: "Issue Number", name: "issueNumber", widget: "number"}
+          - {label: "Own", name: "own", widget: "boolean", required: false}
+          - {label: "Cover Image", name: "cover", widget: "image", required: false}
+          - label: "Alternate Cover Images"
+            name: "alternateCovers"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Cover Image", name: "cover", widget: "image"}
+              - {label: "Own", name: "own", widget: "boolean", required: false}
