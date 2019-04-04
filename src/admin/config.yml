@@ -50,5 +50,5 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Alias", name: "alias", widget: "string", required: false}
           - {label: "Release Year", name: "releaseYear", widget: "date", default: "", format: "YYYY"}
-          - {label: "Own", name: "own", wiget: "select", options: ["bluray", "cloud", "dvd"], multiple: true, required: false}
+          - {label: "Own", name: "own", widget: "select", options: ["bluray", "cloud", "dvd"], multiple: true, required: false}
           - {label: "Cover Image", name: "cover", widget: "image", required: false}
