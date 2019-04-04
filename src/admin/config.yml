@@ -16,7 +16,7 @@ collections:
       - {label: "Type", name: "type", widget: "string", default: "comic"}
       - {label: "Slug", name: "slug", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Alias", name: "alias", widget: "string"}
+      - {label: "Alias", name: "alias", widget: "string", required: false}
       - {label: "Publisher", name: "publisher", widget: "select", options: ["Dark Horse", "IDW", "Legendary", "Marvel"]}
       - {label: "Release Year", name: "releaseYear", widget: "date", default:"", format: "YYYY"}
       - label: "Issues"
