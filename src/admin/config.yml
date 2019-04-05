@@ -33,3 +33,22 @@ collections:
             fields:
               - {label: "Cover Image", name: "cover", widget: "image"}
               - {label: "Own", name: "own", widget: "boolean", required: false}
+  - name: "movies"
+    identifier_field: "slug"
+    label: "Movies"
+    folder: "data/movies"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Type", name: "type", widget: "string", default: "movie"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Title", name: "title", widget: "string"}
+      - label: "Movies"
+        name: "movies"
+        widget: "list"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Alias", name: "alias", widget: "string", required: false}
+          - {label: "Release Year", name: "releaseYear", widget: "date", default: "", format: "YYYY"}
+          - {label: "Own", name: "own", widget: "select", options: ["bluray", "cloud", "dvd"], multiple: true, required: false}
+          - {label: "Cover Image", name: "cover", widget: "image", required: false}
