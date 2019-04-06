@@ -1,29 +1,58 @@
 <template>
 	<Layout>
-		<!-- Learn how to use images here: https://gridsome.org/docs/images -->
-		<g-image alt="Example image" src="~/favicon.png" width="135"/>
-
-		<h1>Hello, world!</h1>
-
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores</p>
-
-		<p class="home-links">
-			<a href="https://gridsome.org/docs" target="_blank" rel="noopener">Gridsome Docs</a>
-			<a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-		</p>
+		<h2>Comics</h2>
+		<ul>
+			<li v-for="{ node } in comics" :key="node.id">
+				<g-link :to="buildPath(node)">{{ node.title }}</g-link>
+			</li>
+		</ul>
+		<h2>Movies</h2>
+		<ul>
+			<li v-for="{ node } in movies" :key="node.id">
+				<g-link :to="buildPath(node)">{{ node.title }}</g-link>
+			</li>
+		</ul>
 	</Layout>
 </template>
-
-<script>
-export default {
-	metaInfo: {
-		title: "Hello, world!"
-	}
-};
-</script>
 
 <style>
 .home-links a {
 	margin-right: 1rem;
 }
 </style>
+
+<script>
+export default {
+	metaInfo: {
+		title: "Home"
+	},
+	methods: {
+		buildPath(node) {
+			return `/${node.type}/${node.slug}`;
+		}
+	},
+	computed: {
+		comics() {
+			return this.$page.collections.edges.filter(({ node }) => node.type === "comic");
+		},
+		movies() {
+			return this.$page.collections.edges.filter(({ node }) => node.type === "movie");
+		}
+	}
+};
+</script>
+
+<page-query>
+query Collections {
+	collections: allData {
+		edges {
+			node {
+				id
+				type
+				slug
+				title
+			}
+		}
+	}
+}
+</page-query>
