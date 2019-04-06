@@ -1,42 +1,60 @@
 <template>
 	<Layout>
-		<h2>Comics</h2>
-		<ul>
-			<li v-for="{ node } in comics" :key="node.id">
-				<g-link :to="buildPath(node)">{{ node.title }}</g-link>
-			</li>
-		</ul>
-		<h2>Movies</h2>
-		<ul>
-			<li v-for="{ node } in movies" :key="node.id">
-				<g-link :to="buildPath(node)">{{ node.title }}</g-link>
-			</li>
-		</ul>
+		<Deck title="Comics" :data="comics">
+			<template slot="card" slot-scope="{ data }">
+				<g-link :to="buildPath(data)">
+					<Card :data="data" />
+				</g-link>
+			</template>
+		</Deck>
+		<Deck title="Movies" :data="movies">
+			<template slot="card" slot-scope="{ data }">
+				<g-link :to="buildPath(data)">
+					<Card :data="data" />
+				</g-link>
+			</template>
+		</Deck>
 	</Layout>
 </template>
 
-<style>
-.home-links a {
-	margin-right: 1rem;
-}
+<style lang="scss" scoped>
+
 </style>
 
 <script>
+import Deck from "~/components/Deck.vue";
+import Card from "~/components/Card.vue";
+
 export default {
+	components: {
+		Deck,
+		Card
+	},
 	metaInfo: {
 		title: "Home"
 	},
 	methods: {
 		buildPath(node) {
 			return `/${node.type}/${node.slug}`;
+		},
+		buildDeck(type) {
+			return this.$page.collections.edges
+				.filter(({ node }) => node.type === type)
+				.map(({ node }) => node)
+				.reduce((acc, current) => {
+					acc.items.push(current);
+
+					return acc;
+				}, { items: [] });
 		}
 	},
 	computed: {
+
 		comics() {
-			return this.$page.collections.edges.filter(({ node }) => node.type === "comic");
+			return this.buildDeck("comic");
 		},
 		movies() {
-			return this.$page.collections.edges.filter(({ node }) => node.type === "movie");
+			return this.buildDeck("movie");
 		}
 	}
 };

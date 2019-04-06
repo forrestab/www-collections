@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<slot name="header" :data="data">
-			<h2>{{ data.title }}</h2>
+			<h2>{{ title }}</h2>
 		</slot>
 		<ul>
 			<li v-for="item in data.items" :key="item.title">
@@ -18,6 +18,7 @@
 <script>
 export default {
 	props: {
+		title: { type: String },
 		data: { type: Object }
 	}
 }
