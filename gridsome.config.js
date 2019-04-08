@@ -13,7 +13,9 @@ module.exports = {
 				// Normally you want data files to be in `src/data/*`, however, I
 				// dont want these files published since building their pages
 				// using graphql.
-				path: "data/**/*.md"
+				path: "data/**/*.md",
+				typeName: "Data",
+				route: "/:type/:slug"
 			}
 		},
 		{

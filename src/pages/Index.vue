@@ -1,29 +1,76 @@
 <template>
 	<Layout>
-		<!-- Learn how to use images here: https://gridsome.org/docs/images -->
-		<g-image alt="Example image" src="~/favicon.png" width="135"/>
-
-		<h1>Hello, world!</h1>
-
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores</p>
-
-		<p class="home-links">
-			<a href="https://gridsome.org/docs" target="_blank" rel="noopener">Gridsome Docs</a>
-			<a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-		</p>
+		<Deck title="Comics" :data="comics">
+			<template slot="card" slot-scope="{ data }">
+				<g-link :to="buildPath(data)">
+					<Card :data="data" />
+				</g-link>
+			</template>
+		</Deck>
+		<Deck title="Movies" :data="movies">
+			<template slot="card" slot-scope="{ data }">
+				<g-link :to="buildPath(data)">
+					<Card :data="data" />
+				</g-link>
+			</template>
+		</Deck>
 	</Layout>
 </template>
 
+<style lang="scss" scoped>
+
+</style>
+
 <script>
+import Deck from "~/components/Deck.vue";
+import Card from "~/components/Card.vue";
+
 export default {
+	components: {
+		Deck,
+		Card
+	},
 	metaInfo: {
-		title: "Hello, world!"
+		title: "Home"
+	},
+	methods: {
+		buildPath(node) {
+			return `/${node.type}/${node.slug}`;
+		},
+		buildDeck(type) {
+			return this.$page.collections.edges
+				.filter(({ node }) => node.type === type)
+				.map(({ node }) => node)
+				.reduce((acc, current) => {
+					acc.items.push(current);
+
+					return acc;
+				}, { items: [] });
+		}
+	},
+	computed: {
+
+		comics() {
+			return this.buildDeck("comic");
+		},
+		movies() {
+			return this.buildDeck("movie");
+		}
 	}
 };
 </script>
 
-<style>
-.home-links a {
-	margin-right: 1rem;
+<page-query>
+query Collections {
+	collections: allData {
+		edges {
+			node {
+				id
+				type
+				slug
+				title
+			}
+		}
+	}
 }
-</style>
+</page-query>
