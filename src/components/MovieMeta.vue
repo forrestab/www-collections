@@ -1,7 +1,11 @@
 <template>
 	<div>
-		{{ data.releaseYear }}
-		{{ data.own }}
+		<time>{{ data.releaseYear }}</time>
+		<ul>
+			<li v-for="media in data.own" :key="media">
+				{{ media }}
+			</li>
+		</ul>
 	</div>
 </template>
 
