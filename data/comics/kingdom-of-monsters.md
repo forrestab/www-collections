@@ -6,6 +6,7 @@ publisher: IDW
 releaseYear: '2011'
 issues:
   - alternateCovers: []
+    cover: collections/comics/kingdom-of-monsters-1.jpg
     issueNumber: 1
   - issueNumber: 2
   - issueNumber: 3
