@@ -7,6 +7,8 @@
 
 module.exports = function (api) {
 	api.loadSource(store => {
-		// Use the Data store API here: https://gridsome.org/docs/data-store-api
+		store.addMetaData("cloudinary", {
+			cloudName: process.env.CLOUDINARY_CLOUD_NAME
+		});
 	})
 }

@@ -61,6 +61,7 @@ query Collection($path: String!) {
 		items: movies {
 			title
 			alias
+			cover
 			releaseYear
 			own
 		}
@@ -73,6 +74,7 @@ query Collection($path: String!) {
 		title
 		items: issues {
 			title: issueNumber
+			cover
 			own
 		}
 	}
