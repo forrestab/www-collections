@@ -3,17 +3,21 @@ type: movie
 slug: miscellaneous
 title: Miscellaneous
 movies:
-  - own:
+  - cover: collections/movies/pacific-rim.jpg
+    own:
       - bluray
     releaseYear: '2013'
     title: Pacific Rim
-  - own:
+  - cover: collections/movies/pacific-rim-uprising.jpg
+    own:
       - bluray
     releaseYear: '2018'
     title: Pacific Rim Uprising
-  - releaseYear: '1956'
+  - cover: collections/movies/rodan.jpg
+    releaseYear: '1956'
     title: Rodan
-  - releaseYear: '1966'
+  - cover: collections/movies/war-of-the-gargantuas.jpg
+    releaseYear: '1966'
     title: The War of the Gargantuas
 ---
 
