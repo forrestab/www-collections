@@ -3,7 +3,7 @@
 		<Deck :data="data">
 			<component :is="getHeader" slot="header" slot-scope="{ data }" :data="data" />
 			<Card slot="card" slot-scope="{ data }" :data="data">
-				<component :is="getMeta" slot-scope="{ meta }" :data="meta" />
+				<component :is="getOwn" slot-scope="{ data }" :data="data" />
 			</Card>
 		</Deck>
 	</Layout>
@@ -13,18 +13,18 @@
 import Deck from "~/components/Deck.vue";
 import Card from "~/components/Card.vue";
 import ComicHeader from "~/components/ComicHeader.vue";
-import ComicMeta from "~/components/ComicMeta.vue";
+import ComicOwn from "~/components/ComicOwn.vue";
 import MovieHeader from "~/components/MovieHeader.vue";
-import MovieMeta from "~/components/MovieMeta.vue";
+import Own from "~/components/Own.vue";
 
 export default {
 	components: {
 		Deck,
 		Card,
 		ComicHeader,
-		ComicMeta,
+		ComicOwn,
 		MovieHeader,
-		MovieMeta
+		Own
 	},
 	metaInfo() {
 		return {
@@ -38,8 +38,12 @@ export default {
 		getHeader() {
 			return `${this.$page.data.type}Header`;
 		},
-		getMeta() {
-			return `${this.$page.data.type}Meta`;
+		getOwn() {
+			if (this.$page.data.type === "comic") {
+				return `${this.$page.data.type}Own`;
+			}
+
+			return "Own";
 		}
 	}
 };

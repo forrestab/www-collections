@@ -40,16 +40,26 @@ export default {
 		buildDeck(type) {
 			return this.$page.collections.edges
 				.filter(({ node }) => node.type === type)
-				.map(({ node }) => node)
+				.map(({ node }) => {
+					let flatNode = Object.assign({}, node);
+					let typeCollectionName = this.getTypeCollection(node);
+
+					delete flatNode[typeCollectionName];
+					flatNode["cover"] = node[typeCollectionName][0].cover;
+
+					return flatNode;
+				})
 				.reduce((acc, current) => {
 					acc.items.push(current);
 
 					return acc;
 				}, { items: [] });
+		},
+		getTypeCollection(node) {
+			return node.type === "comic" ? "issues" : "movies";
 		}
 	},
 	computed: {
-
 		comics() {
 			return this.buildDeck("comic");
 		},
@@ -69,6 +79,12 @@ query Collections {
 				type
 				slug
 				title
+				movies {
+					cover
+				}
+				issues {
+					cover
+				}
 			}
 		}
 	}

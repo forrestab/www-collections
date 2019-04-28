@@ -1,24 +1,41 @@
 <template>
-	<header>
+	<header class="comic-header">
 		<h2>{{ data.title }}</h2>
-		<LabelAndValue label="Publisher">{{ data.publisher }}</LabelAndValue>
-		<LabelAndValue label="Release Year">
-			<time>{{ data.releaseYear }}</time>
-		</LabelAndValue>
-		<LabelAndValue label="Total Issues">{{ data.items.length }}</LabelAndValue>
+		<ul class="comic-header-stats">
+			<li>
+				<Stat label="Publisher">{{ data.publisher }}</Stat>
+			</li>
+			<li>
+				<Stat label="Release Year">
+					<time>{{ data.releaseYear }}</time>
+				</Stat>
+			</li>
+			<li>
+				<Stat label="Total Issues">{{ data.items.length }}</Stat>
+			</li>
+		</ul>
 	</header>
 </template>
 
 <style lang="scss" scoped>
+.comic-header {
 
+	&-stats {
+		display: flex;
+
+		& > *:not(:last-child) {
+			margin-right: 2rem;
+		}
+	}
+}
 </style>
 
 <script>
-import LabelAndValue from "~/components/LabelAndValue.vue"
+import Stat from "~/components/Stat.vue"
 
 export default {
 	components: {
-		LabelAndValue
+		Stat
 	},
 	props: {
 		data: { type: Object }
