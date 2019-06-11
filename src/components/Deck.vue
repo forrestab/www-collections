@@ -1,11 +1,9 @@
 <template>
-	<section>
-		<slot name="header" :data="data">
-			<h2>{{ title }}</h2>
-		</slot>
-		<ul>
-			<li v-for="item in data.items" :key="item.title">
-				<slot name="card" :data="item" />
+	<section class="deck">
+		<h2 v-if="title">{{ title }}</h2>
+		<ul class="deck-items">
+			<li v-for="item in items" :key="item.id">
+				<a :href="item.path">{{ item.title }}</a>
 			</li>
 		</ul>
 	</section>
@@ -19,7 +17,7 @@
 export default {
 	props: {
 		title: { type: String },
-		data: { type: Object }
+		items: { type: Array }
 	}
 }
 </script>
