@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: forrestab/www-collections
+
+publish_mode: editorial_workflow
+media_folder: "static/uploads"
+public_folder: "uploads"
+
+collections:
+  - label: "Comics"
+    name: "comics"
+    folder: "content/comics"
+    create: true
+    filter: { field: "category", value: "comics" }
+    fields:
+      - { label: "Category", name: "category", widget: "select", options: ["comics", "movies"], default: ["comics"] }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publisher", name: "publisher", widget: "select", options: ["Dark Horse", "IDW", "Legendary", "Marvel"] }
+      - { label: "Release Year", name: "releaseYear", widget: "number", valueType: "int", min: 1950, max: 9999 }
+      - label: "Issues"
+        name: "issues"
+        widget: "list"
+        fields:
+          - { label: "Issue", name: "issue", widget: "number", valueType: "int", min: 1, max: 99 }
+          - label: "Covers"
+            name: "covers"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Cover Image", name: "coverImage", widget: "image" }
+              - { label: "Own", name: "own", widget: "boolean", required: false }
+  - label: "Movies"
+    name: "movies"
+    folder: "content/movies"
+    create: true
+    filter: { field: "category", value: "movies" }
+    fields:
+      - { label: "Category", name: "category", widget: "select", options: ["comics", "movies"], default: ["movies"] }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Alias", name: "alias", widget: "string", required: false }
+      - { label: "Release Year", name: "releaseYear", widget: "number", valueType: "int", min: 1950, max: 9999 }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Own", name: "own", widget: "select", options: ["bluray", "cloud", "dvd"], multiple: true, required: false }
+  - label: "Tags"
+    name: "tags"
+    folder: "content/tags"
+    create: true
+    fields:
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Feature Image", name: "featureImage", widget: "image", required: false }
