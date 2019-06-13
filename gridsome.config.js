@@ -1,27 +1,41 @@
-// This is where project configuration and plugin options are located.
-// Learn more: https://gridsome.org/docs/config
-
-// Changes here require a server restart.
-// To restart press CTRL + C in terminal and run `gridsome develop`
-
 module.exports = {
 	siteName: "Collections",
 	plugins: [
 		{
 			use: "@gridsome/source-filesystem",
 			options: {
-				// Normally you want data files to be in `src/data/*`, however, I
-				// dont want these files published since building their pages
-				// using graphql.
-				path: "data/**/*.md",
-				typeName: "Data",
-				route: "/:type/:slug"
+				path: "content/comics/**/*.md",
+				typeName: "Comic",
+				route: "/:tags/comics/:slug",
+				refs: {
+					tags: "Tag"
+				}
+			}
+		},
+		{
+			use: "@gridsome/source-filesystem",
+			options: {
+				path: "content/movies/**/*.md",
+				typeName: "Movie",
+				route: "/:tags/movies/:slug",
+				refs: {
+					tags: "Tag"
+				}
+			}
+		},
+		{
+			use: "@gridsome/source-filesystem",
+			options: {
+				path: "content/tags/**/*.md",
+				typeName: "Tag",
+				route: "/:id"
 			}
 		},
 		{
 			use: "gridsome-plugin-netlify-cms",
 			options: {
-				modulePath: "src/admin/index.js",
+				configPath: "static/admin/config.yml",
+				modulePath: "static/admin/index.js",
 				publicPath: "/admin"
 			}
 		}
