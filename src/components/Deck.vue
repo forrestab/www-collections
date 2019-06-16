@@ -1,11 +1,12 @@
 <template>
 	<section class="deck">
 		<h2 v-if="title">{{ title }}</h2>
-		<ul class="deck-items">
-			<li v-for="item in sortedItems" :key="item.id">
-				<a :href="item.path">{{ item.title }}</a>
-			</li>
-		</ul>
+		<Card
+			v-for="item in items"
+			:key="item.id"
+			:title="item.title"
+			:data="item"
+		/>
 	</section>
 </template>
 
@@ -14,16 +15,15 @@
 </style>
 
 <script>
+import Card from "~/components/Card.vue";
+
 export default {
+	components: {
+		Card
+	},
 	props: {
 		title: { type: String },
 		items: { type: Array }
-	},
-	computed: {
-		sortedItems() {
-			return this.items
-				.sort((a, b) => (a.releaseYear > b.releaseYear) ? 1 : ((b.releaseYear > a.releaseYear) ? -1 : 0));
-		}
 	}
 }
 </script>
