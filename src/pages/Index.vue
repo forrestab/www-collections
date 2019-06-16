@@ -1,27 +1,31 @@
 <template>
-  <Layout>
-    <Deck :items="tags" />
-  </Layout>
+	<Layout>
+		<Deck :items="tags"/>
+	</Layout>
 </template>
 
 <style lang="scss" scoped>
 </style>
 
 <script>
+import { sortBy } from "~/utils";
 import Deck from "~/components/Deck.vue";
 
 export default {
-  components: {
-    Deck
-  },
-  metaInfo: {
-    title: "Home"
-  },
-  computed: {
-    tags() {
-		return this.$page.allTag.edges.map(edge => edge.node);
+	components: {
+		Deck
+	},
+	metaInfo: {
+		title: "Home"
+	},
+	computed: {
+		tags() {
+			return sortBy(
+				this.$page.allTag.edges.map(edge => edge.node),
+				"title"
+			);
+		}
 	}
-  }
 };
 </script>
 
@@ -33,6 +37,7 @@ query {
         id
         title
         path
+		featureImage
       }
     }
   }

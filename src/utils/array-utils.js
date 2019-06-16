@@ -21,3 +21,17 @@ export const distinct = (items, key) => {
 		return unique;
 	}, []);
 };
+
+export const sortGroupAndItems = (items, property) => {
+	return Object.keys(items)
+		.sort()
+		.reduce((collection, key) => {
+			collection[key] = sortBy(items[key], property);
+
+			return collection;
+		}, {});
+};
+
+export const sortBy = (items, key) => {
+	return items.sort((a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0));
+};
