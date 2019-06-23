@@ -1,6 +1,15 @@
 <template>
 	<Layout>
-		<Deck :items="tags"/>
+		<c-deck :items="tags">
+			<template slot-scope="{ data }">
+				<c-card>
+					<!-- image -->
+					<c-card-header>
+						<h3><g-link :to="data.path">{{ data.title }}</g-link></h3>
+					</c-card-header>
+				</c-card>
+			</template>
+		</c-deck>
 	</Layout>
 </template>
 
@@ -10,10 +19,18 @@
 <script>
 import { sortBy } from "~/utils";
 import Deck from "~/components/Deck.vue";
+import Card from "~/components/card/Card.vue";
+import CardHeader from "~/components/card/CardHeader.vue";
+import CardMedia from "~/components/card/CardMedia.vue";
+import Image from "~/components/Image.vue";
 
 export default {
 	components: {
-		Deck
+		"c-deck": Deck,
+		"c-card": Card,
+		"c-card-header": CardHeader,
+		"c-card-media": CardMedia,
+		"c-image": Image
 	},
 	metaInfo: {
 		title: "Home"
