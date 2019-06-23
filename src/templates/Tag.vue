@@ -3,7 +3,9 @@
 		<h1>{{$page.tag.title}}</h1>
 		{{$page.tag.featureImage}}
 		<template v-for="(category, index) in categories">
-			<Deck :title="index" :items="category" :key="category.id"/>
+			<c-deck :title="index" :items="category" :key="category.id">
+				<component :is="getCard(index)"  slot-scope="{ data }" :data="data" />
+			</c-deck>
 		</template>
 	</Layout>
 </template>
@@ -11,10 +13,14 @@
 <script>
 import { groupBy, sortGroupAndItems } from "~/utils";
 import Deck from "~/components/Deck.vue";
+import ComicCard from "~/components/ComicCard.vue";
+import MovieCard from "~/components/MovieCard.vue";
 
 export default {
 	components: {
-		Deck
+		"c-deck": Deck,
+		"c-comic-card": ComicCard,
+		"c-movie-card": MovieCard
 	},
 	metaInfo() {
 		return {
@@ -30,6 +36,11 @@ export default {
 				),
 				"releaseYear"
 			);
+		}
+	},
+	methods: {
+		getCard(category) {
+			return `c-${category.replace("s", "")}-card`;
 		}
 	}
 };
@@ -50,6 +61,7 @@ query ($path: String!) {
             category
             path
 			releaseYear
+			publisher
           }
           ... on Movie {
 			id
@@ -57,6 +69,8 @@ query ($path: String!) {
             category
             path
 			releaseYear
+			coverImage
+			own
           }
         }
       }
