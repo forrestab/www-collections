@@ -1,15 +1,15 @@
 <template>
 	<ul>
 		<li class="text" :class="cloudCss">
-			<font-awesome icon="play" transform="shrink-10 down-1" mask="cloud" />
+			<fa icon="play" transform="shrink-10 down-1" mask="cloud" />
 			<span>Streaming</span>
 		</li>
 		<li class="text" :class="blurayCss">
-			<font-awesome icon="compact-disc" fixed-width />
+			<fa icon="compact-disc" fixed-width />
 			<span>Blu-ray</span>
 		</li>
 		<li class="text" :class="dvdCss">
-			<font-awesome icon="compact-disc" fixed-width />
+			<fa icon="compact-disc" fixed-width />
 			<span>DVD</span>
 		</li>
 	</ul>
